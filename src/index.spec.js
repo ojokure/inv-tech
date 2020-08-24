@@ -1,3 +1,7 @@
+const axios = require("axios");
+const response = require("./__mocks__/response");
+const mockUrl = require("./__mocks__/axiosUrl");
+
 const {
   getWeatherInfo,
   normalizeInput,
@@ -16,4 +20,13 @@ test("normalizeInput works as it should", () => {
     "Lagos",
   ]);
   expect(normalizeInput(testInput2)).not.toEqual(testInput2);
+});
+
+test("getWeatherInfo works as it should", async () => {
+  axios.get.mockImplementationOnce(() => Promise.resolve({ data: response }));
+
+  const weatherInfo = await getWeatherInfo(["Lagos"]);
+
+  expect(axios.get).toHaveBeenCalledTimes(1);
+  expect(axios.get).toHaveBeenCalledWith(mockUrl);
 });
