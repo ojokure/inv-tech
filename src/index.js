@@ -1,4 +1,4 @@
-const { getWeatherInfo, normalizeInput } = require("../helper");
+const { getWeatherInfo, normalizeInput } = require("../helpers");
 
 const [, , ...locationNames] = normalizeInput(process.argv);
 
