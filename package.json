@@ -1,19 +1,18 @@
 {
   "name": "inv-tech",
   "version": "1.0.0",
-  "description": "Tell Weather",
+  "description": "a simple tell wether app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "tellweather": "node src/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ojokure/inv-tech.git"
+  "author": "oladimeji",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2"
   },
-  "author": "MIT",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ojokure/inv-tech/issues"
-  },
-  "homepage": "https://github.com/ojokure/inv-tech#readme"
+  "devDependencies": {
+    "jest": "^26.1.0"
+  }
 }
