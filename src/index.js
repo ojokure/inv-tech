@@ -1,22 +1,28 @@
+const { normalizeInput } = require("../helper");
+
 const axios = require("axios");
 
-function getWeatherInfo(location) {
-  axios
-    .get(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=771dcef478ae5faab8ee377e738531eb`
-    )
-    .then((response) => {
-      const time = standardizeLocalTime(response.data.timezone);
-      const location = response.data.name;
-      const description = response.data.weather[0].description;
-      const temperature = response.data.main.temp;
-      console.log(
-        `It's ${time} in ${location} with ${description} at ${temperature}°C temp`
-      );
-    })
-    .catch((err) => {
-      console.log("Oops!");
-    });
+const [, , ...locationNames] = normalizeInput(process.argv);
+
+function getWeatherInfo(locationNames) {
+  locationNames.forEach((location) => {
+    axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=771dcef478ae5faab8ee377e738531eb`
+      )
+      .then((response) => {
+        const time = standardizeLocalTime(response.data.timezone);
+        const location = response.data.name;
+        const description = response.data.weather[0].description;
+        const temperature = response.data.main.temp;
+        console.log(
+          `It's ${time} in ${location} with ${description} at ${temperature}°C temp`
+        );
+      })
+      .catch((err) => {
+        console.log("Oops! Please try again");
+      });
+  });
 }
 
 function standardizeLocalTime(timezone) {
@@ -37,4 +43,4 @@ function standardizeLocalTime(timezone) {
   return localTime;
 }
 
-getWeatherInfo("lagos");
+getWeatherInfo(locationNames);
