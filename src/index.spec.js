@@ -21,7 +21,6 @@ test("normalizeInput works as it should", () => {
   ]);
   expect(normalizeInput(testInput2)).not.toEqual(testInput2);
 });
-
 test("getWeatherInfo works as it should", async () => {
   axios.get.mockImplementationOnce(() => Promise.resolve({ data: response }));
 
